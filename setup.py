@@ -24,7 +24,7 @@ setup(
     },
     entry_points={
         'certbot.plugins': [
-            'copy-installer = installer_copy:CopyInstaller',
+            'copy-installer = copy_installer:CopyInstaller',
         ],
     },
 )
