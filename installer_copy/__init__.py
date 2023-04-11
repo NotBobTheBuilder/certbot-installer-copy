@@ -1,1 +1,1 @@
-from installer_copy import Installer
+from .installer_copy import Installer
