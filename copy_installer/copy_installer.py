@@ -46,7 +46,7 @@ class CopyInstaller(common.Plugin, interfaces.Installer):
         for source in [cert_path, key_path, chain_path, fullchain_path]:
             source_filename = os.path.basename(source)
             dest_path = os.path.join(destination, source_filename)
-            shutil.copy2(cert_path, dest_path)
+            shutil.copy2(source, dest_path)
 
     def enhance(self, domain: str, enhancement: str, 
                 options: Optional[Union[List[str], str]] = None) -> None:
