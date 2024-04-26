@@ -1,5 +1,6 @@
 from certbot import interfaces
 from certbot.plugins import common
+from certbot.compat.filesystem import realpath
 from certbot.compat import os
 from certbot import errors
 
@@ -43,10 +44,11 @@ class CopyInstaller(common.Plugin, interfaces.Installer):
             chain_path: str, fullchain_path: str) -> None:
         destination = self.conf('destination')
 
-        for source in [cert_path, key_path, chain_path, fullchain_path]:
-            source_filename = os.path.basename(source)
+        for source_symlink in [cert_path, key_path, chain_path, fullchain_path]:
+            source_filename = os.path.basename(source_symlink)
+            source_realpath = realpath(source_symlink)
             dest_path = os.path.join(destination, source_filename)
-            shutil.copy2(source, dest_path)
+            shutil.copy2(source_realpath, dest_path)
 
     def enhance(self, domain: str, enhancement: str, 
                 options: Optional[Union[List[str], str]] = None) -> None:
